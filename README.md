@@ -19,7 +19,6 @@ Make sure you have the following installed on your system:
 1. Clone the repository:
     ```bash
     git clone <repository_url>
-    cd chatbot-backend
     ```
 
 2. Build and run the Docker container:
