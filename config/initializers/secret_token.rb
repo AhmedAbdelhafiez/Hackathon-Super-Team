@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-MyGpt::Application.config.secret_token = 'd39afff3d7e38f927ab727576d8239dec7edee5573a4958ca498be7b54089bc08668ac7e8207116314d17e1cd2738c897c138cff398f16300b1ec24492fecb8d'
+HackathonSuperTeam::Application.config.secret_token = '9bde68fbd62a6e6ce01fe933dd67c88ac3fd7ea2515bc12c7401414bce74290e014a9afbf6c5602a4bc07a78b0bfedaf80e89cf538e2ce1b4932e340d9994174'

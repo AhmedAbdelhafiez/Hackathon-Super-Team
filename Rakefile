@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-MyGpt::Application.load_tasks
+HackathonSuperTeam::Application.load_tasks

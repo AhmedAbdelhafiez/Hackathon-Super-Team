@@ -1,4 +1,4 @@
-MyGpt::Application.routes.draw do
+HackathonSuperTeam::Application.routes.draw do
   resources :questions, only: [:index, :create]
   # The priority is based upon order of creation:
   # first created -> highest priority.

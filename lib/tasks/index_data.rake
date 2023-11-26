@@ -21,7 +21,7 @@ task index_data: :environment do
 
     embedding = response.dig('data', 0, 'embedding')
 
-    Item.create!(page_name:, text:, embedding:)
+    Item.create!(page_name: page_name, text: text, embedding: embedding)
 
     puts "Data for #{page_name} created!"
   end

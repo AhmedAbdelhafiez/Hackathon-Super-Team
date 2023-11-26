@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.20'
+gem 'rails', '7.0.5'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -18,10 +18,10 @@ gem 'pg'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 # Bundle the extra gems:
-gem 'bj'
-gem 'nokogiri'
-#gem 'sqlite3-ruby', :require => 'sqlite3'
-gem 'aws-s3', :require => 'aws/s3'
+# gem 'bj'
+# gem 'nokogiri'
+# gem 'sqlite3-ruby', :require => 'sqlite3'
+# gem 'aws-s3', :require => 'aws/s3'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
@@ -29,3 +29,7 @@ gem 'aws-s3', :require => 'aws/s3'
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+gem "neighbor", "~> 0.3.1"
+
+gem "ruby-openai", "~> 6.3"
