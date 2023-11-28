@@ -23,11 +23,11 @@ default: &default
   host: localhost
   username: postgres
   password: postgres
+  #port: 5435
 
 development:
   <<: *default
   database: Hackathon_Super_Team_development
-  #port: 5434
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is

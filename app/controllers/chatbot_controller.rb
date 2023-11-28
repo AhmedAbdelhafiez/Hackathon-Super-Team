@@ -9,7 +9,7 @@ class ChatbotController < ApplicationController
   # before_action :set_user_data, only: [:send_question]
   
   def get_question
- 	set_user_data
+ 	  set_user_data
   	send_question
   end
   
@@ -48,7 +48,7 @@ class ChatbotController < ApplicationController
     # Retrieve the stored question (you may want to fetch it from a database)
     # For simplicity, we are retrieving it from an instance variable here
     question = @question
-    answer = params[:question]
+    answer = params[:answer]
 
     AnswerQuestion.new(question).call
     # Process the question and generate an answer

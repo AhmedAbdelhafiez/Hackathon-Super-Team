@@ -1,9 +1,8 @@
 class Question < ApplicationRecord
   validates :content, presence: true
   
-  def next_question(user)
-  	nxt_question = Question.find(user.question_offset).content
+  def self.next_question(user)
   	user.increment_offset
-  	nxt_question
+  	Question.find(user.question_offset).content
   end
 end
