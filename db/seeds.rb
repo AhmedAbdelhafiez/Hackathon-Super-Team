@@ -22,3 +22,7 @@ end
 
 puts "Seed data for questions created successfully!"
 
+User.create(first_name: "Ahmed", last_name: "Abdelhafiez", email: "Ahmed.Abdelhafiez@trianglz.com", question_offset: 0)
+
+
+puts "Seed data for users created successfully!"

@@ -21,7 +21,33 @@ Make sure you have the following installed on your system:
     git clone <repository_url>
     ```
 
+## Normal Way
+
+2. Install rbenv 
+
+3. Install specific ruby version 
+    ```bash
+    rbenv install 3.0.0
+    ```
+4. Do bundle install
+    ```bash
+    bundle install
+    ```
+5. Setup postgres db
+    ```bash
+    docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres --name postgres_db ankane/pgvector
+    ```
+6. Initilize db
+    ```bash
+    rake db:create
+    rake db:migrate
+    ```
+	
+## Docker
+
 2. Build and run the Docker container:
     ```bash
     docker-compose up --build
     ```
+    
+   
