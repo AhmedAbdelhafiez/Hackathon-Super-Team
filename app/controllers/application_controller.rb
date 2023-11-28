@@ -1,3 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+	def index
+		User.first.update(question_offset: 0)
+	end
 end
