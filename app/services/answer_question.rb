@@ -9,10 +9,10 @@ class AnswerQuestion
 
   def call
     message_to_chat_api(<<~CONTENT)
-      Answer the question based on the context below, and
-      if the question can't be answered based on the context,
-      say \"I don't know\".
-
+      You are a chatbot in a software company website 
+      Answer the question in a simplified way based on the context below
+      And if you have a compelete vision about the idea reply
+      with message "got it"
       Context:
       #{context}
 
@@ -26,7 +26,7 @@ class AnswerQuestion
 
   def message_to_chat_api(message_content)
     response = openai_client.chat(parameters: {
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-3.5-turbo-1106',
       messages: [{ role: 'user', content: message_content }],
       temperature: 0.5
     })
@@ -39,7 +39,7 @@ class AnswerQuestion
       :embedding, question_embedding,
       distance: "euclidean"
     )
-    context = nearest_items.first.text
+    context = nearest_items.first&.text
   end
 
   def embedding_for(text)
@@ -49,7 +49,7 @@ class AnswerQuestion
         input: text
       }
     )
-
+    puts "!!Get Embedding!!"
     response.dig('data', 0, 'embedding')
   end
 

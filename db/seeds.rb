@@ -9,20 +9,22 @@
 
 # db/seeds.rb
 
+sys_user = User.create(name: "Ahmed Abdelhafiez", email: "Ahmed.Abdelhafiez@trianglz.com", country: "Egypt", source: "Facebook", question_offset: 0)
+
+puts "Seed data for system user created successfully!"
+
 questions = [
-  "What is your name",
-  "What is your email",
-  "Where are you from?",
+  "What is the category of your app idea?",
+  "What best describes your idea?",
+  "How are you funding your app?",
+  "What is your rough budget?",
+  "How soon do you need your app?"
+  
   # Add more questions as needed
 ]
 
 questions.each do |question_text|
-  Question.create(content: question_text)
+  Question.create(content: question_text, user_id: sys_user.id)
 end
 
 puts "Seed data for questions created successfully!"
-
-User.create(first_name: "Ahmed", last_name: "Abdelhafiez", email: "Ahmed.Abdelhafiez@trianglz.com", question_offset: 0)
-
-
-puts "Seed data for users created successfully!"

@@ -33,16 +33,18 @@ Make sure you have the following installed on your system:
     ```bash
     bundle install
     ```
-5. Setup postgres db
-    ```bash
-    docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres --name postgres_db ankane/pgvector
-    ```
+5. Setup postgres
+
 6. Initilize db
     ```bash
     rake db:create
     rake db:migrate
     ```
-	
+7. Initialize Data 
+    ```bash
+    rake db:seed
+    rake index_data 
+    ```
 ## Docker
 
 2. Build and run the Docker container:

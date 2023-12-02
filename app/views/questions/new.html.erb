@@ -1,0 +1,11 @@
+<h1>Ask a Question</h1>
+
+<%= form_with(model: @question, url: questions_path, local: true) do |form| %>
+  <%= form.label :content %>
+  <%= form.text_field :content %>
+
+  <%= form.label :body %>
+  <%= form.text_area :body %>
+
+  <%= form.submit 'Ask Question' %>
+<% end %>

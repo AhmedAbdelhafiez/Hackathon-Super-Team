@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_28_222136) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_01_125203) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -19,24 +19,36 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_28_222136) do
     t.string "page_name"
     t.text "text"
     t.vector "embedding", limit: 1536
+    t.string "media"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "questions", force: :cascade do |t|
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.string "answer"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
+    t.string "name"
     t.string "email"
+    t.string "phone"
     t.string "country"
+    t.string "company"
+    t.integer "size"
+    t.string "title"
+    t.string "idea"
+    t.string "source"
+    t.string "experience"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "question_offset"
   end
 
+  add_foreign_key "items", "users"
+  add_foreign_key "questions", "users"
 end

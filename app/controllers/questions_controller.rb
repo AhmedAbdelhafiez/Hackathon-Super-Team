@@ -1,10 +1,12 @@
 class QuestionsController < ApplicationController
   def index
   	@questions = Question.all
+    get
   end
 
-  def get
-    @question = question.first
+  def new
+    user = User.first
+    @question = Question.next_question(user)
   end
 
   def create
