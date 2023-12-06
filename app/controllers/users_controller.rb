@@ -29,6 +29,11 @@ class UsersController < ApplicationController
 		render json: { response: { user_id: user.id} }
 	end
 
+	def dummy_user
+		user = User.create(name: "NewUser", email: "New.User#{@user.id+1}@trianglz.com", country: "Egypt", source: "Facebook", question_offset: 0)
+		render json: {new_user_id: user.id}
+	end
+
 	private
 
 	def extract_user_params

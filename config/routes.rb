@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/api/user', to: 'users#new'
   get '/api/current_user', to: 'users#current_user'
   post '/api/user', to: 'users#create'
+  post '/api/dummy_user', to: 'users#dummy_user'
   delete '/api/user', to: 'users#delete'
   
   # Questions
@@ -18,8 +19,7 @@ Rails.application.routes.draw do
   post '/api/question', to: 'chatbot#post_question'
   get '/api/answer', to: 'chatbot#get_answer'
   post '/api/answer', to: 'chatbot#post_answer'
-  post '/api/new_user', to: 'chatbot#new_user'
-
+  
   # Reports
   get '/api/user_report', to: 'chatbot#user_report'
   
