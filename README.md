@@ -45,6 +45,10 @@ Make sure you have the following installed on your system:
     rake db:seed
     rake index_data 
     ```
+8. Start Server 
+    ```bash
+    rails s
+    ```
 ## Docker
 
 2. Build and run the Docker container:
