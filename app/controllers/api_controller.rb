@@ -39,7 +39,6 @@ class ApiController < ApplicationController
   # Output: status -> json
   def post_answer
     puts "Saving Answer into db #{@answer.text} for user #{@user.name}"
-    #IndexData.new(user_id, name, answer).call
     @answer.save!
     render json: {status: 200}
   end
@@ -62,8 +61,8 @@ class ApiController < ApplicationController
   private
 
   def set_user_data
-    #@user = User.find(params[:id])
-    @user = User.last
+    @user = User.find(params[:id])
+    #@user = User.last
   end
 
   def extract_answer_params

@@ -1,16 +1,16 @@
 class QuestionsController < ApplicationController
   def index
   	@questions = Question.all
-    get
+    render json: @questions.to_json
   end
 
   def new
     user = User.first
     @question = Question.next_question(user)
+    render json: @question.to_json
   end
 
   def create
-    @answer = AnswerQuestion.new(question).call
   end
 
   private
