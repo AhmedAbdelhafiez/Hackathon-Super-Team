@@ -2,6 +2,8 @@ class Question < ApplicationRecord
   validates :content, presence: true
   validates :user_id, presence: true
 
+  has_many :answers
+
   QUESTIONS = [
     "From trianglZ's past experience, could you estimate the anticipated timeline for the project I've just presented to you?",
     "For the project idea I've just presented to you now, provide me with global competitors filtered by competitors in the same country if they exist?",

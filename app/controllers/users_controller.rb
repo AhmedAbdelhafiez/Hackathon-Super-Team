@@ -13,8 +13,9 @@ class UsersController < ApplicationController
 		render json: {response: { status: "User created successfully!" }} 
 	end
 
-	def new 
-		user = User.new
+	def get_user 
+		user = User.find(param[:user_id])
+		
 		render json: user.to_json
 	end
 

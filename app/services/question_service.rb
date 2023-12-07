@@ -38,8 +38,7 @@ class QuestionService
     response = openai_client.chat(parameters: {
       model: 'gpt-3.5-turbo-1106',
       messages: [{ role: 'user', content: message_content }],
-      temperature: 0.5
-    })
+t    })
     response.dig('choices', 0, 'message', 'content')
   end
 
