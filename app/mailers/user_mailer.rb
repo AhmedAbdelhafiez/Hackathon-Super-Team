@@ -1,9 +1,11 @@
 class UserMailer < ApplicationMailer
-    def welcome_email(user)
+    def send_meeting_email(user)
         @user = user
+        @summary = user.generate_summary
+        @competitors = ""
         mail(to: @user.email, subject: 'Welcome to My Awesome Site')
     end
 end
 
 
-#UserMailer.welcome_email(user).deliver_now
+#UserMailer.send_meeting_email(user).deliver_now

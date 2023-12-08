@@ -14,7 +14,7 @@ class User < ApplicationRecord
   end
 
   def generate_summary
-    answers = get_user_answers
+    answers = get_answers
     puts "answers!!!!"
     answers.join(",")
   end

@@ -53,15 +53,23 @@ class ApiController < ApplicationController
     render json: report.to_json
   end
 
+  # System Analytics
+  # GET Request
   def system_report
     report = SystemReportsService.new.generate
     render json: report.to_json
   end
 
+  # GET Request
+  # Input: user_id  Integer
+  def request_meeting
+    UserMailer.send_meeting_email(@user).deliver_now
+  end
+
   private
 
   def set_user_data
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     #@user = User.last
   end
 

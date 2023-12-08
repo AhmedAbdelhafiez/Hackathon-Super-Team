@@ -24,4 +24,6 @@ Rails.application.routes.draw do
   get '/api/system_report', to: 'api#system_report'
   get '/api/user_report', to: 'api#user_report'
   
+  # Meetings
+  get '/api/request_meeting', to: 'api#request_meeting'
 end
