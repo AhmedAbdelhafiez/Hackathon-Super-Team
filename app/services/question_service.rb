@@ -1,65 +1,64 @@
 # frozen_string_literal: true
 
 class QuestionService
+  attr_reader :background
   attr_reader :question
+  attr_reader :context
   attr_reader :response_type
+
+  BACKGROUND = "Trianglz is a software company that located in Alexandria Egypt
+  You are a wizard integerated in company website and you are reciveing requests from clients to build a software product".freeze
+    
   RESPONSELAYOUTS = [
     "Response will be in json format with three fields response and video
       the first field is response will be like Great news! We've got a ton of experience in this business concept. Let me tell you about our product
-      the second field is product which consists of name and summary in 3 lines maximum 
+      the second field is product which consists of name and summary in 3 lines maximum starts with product name
       the third one is a video",
-    "Response will be in json format with only one field response"
+    "Act like a normal person"
   ]
-  def initialize(question, response_type)
+  def initialize(background, question, context, response_type)
+    @background = background || BACKGROUND
     @question = question
+    @context = context
     @response_layout = RESPONSELAYOUTS[response_type]
   end
 
+         
   def call()
     message_to_chat_api(<<~CONTENT)
-      You are website for a software company called Trianglz, located in Alexandria Egypt
-      You are reciveing requests from clients to build a software product  
-      Answer the following question without yes or no in a simplififed way maximum 3 lines.
-      #{@response_layout}
-      Based on the context below
+      Based on the following information  
+      Background:#{@background}
       Context:
       #{context}
-      ---
-      Question: #{question}
+      Reply on this question: #{@question} in this format #{@response_layout}
     CONTENT
   end
 
   private
 
   def message_to_chat_api(message_content)
-    if response_type
-      return nil 
-    end
     response = openai_client.chat(parameters: {
       model: 'gpt-3.5-turbo-1106',
       messages: [{ role: 'user', content: message_content }],
-t    })
+      temperature: 0.5
+    })
     response.dig('choices', 0, 'message', 'content')
   end
 
   def context
-    question_embedding = embedding_for(question)
+    return @context unless @context.nil?
+    puts "!!!Start Getting Context from db!!!"
+    question_embedding = EmbeddingService.new(question).call
     nearest_items = Item.nearest_neighbors(
       :embedding, question_embedding,
       distance: "euclidean"
     )
-    context = nearest_items.first&.text
-  end
-
-  def embedding_for(text)
-    response = openai_client.embeddings(
-      parameters: {
-        model: 'text-embedding-ada-002',
-        input: text
-      }
-    )
-    puts "!!Get Embedding!!"
-    response.dig('data', 0, 'embedding')
+    unless nearest_items.empty?
+      puts "!!!Found Items!!!! #{nearest_items.first&.text}"
+      puts "!!!!"
+      return nearest_items.first&.text
+    end
+    return @context
   end
 
   def openai_client
@@ -67,4 +66,4 @@ t    })
   end
 end
 
-# AnswerQuestion.new("Yours question..").call
+# QuestionService.new("background"Yours question..", "context", "response_type").call

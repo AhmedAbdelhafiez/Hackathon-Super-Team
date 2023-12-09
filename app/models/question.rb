@@ -9,8 +9,12 @@ class Question < ApplicationRecord
     "For the project idea I've just presented to you now, provide me with global competitors filtered by competitors in the same country if they exist?",
     "From trianglz past project experience and the competitors mentioned, provide me with a list of features that can be implemented for a software platform. In bullet points format."
   ]
+
+  def self.questions_limit
+    Question.count
+  end
+
   def self.next_question(user)
-  	user.increment_offset
     begin
       Question.find(user.question_offset)
     rescue ActiveRecord::RecordNotFound => e

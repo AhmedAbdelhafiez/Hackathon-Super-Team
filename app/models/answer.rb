@@ -1,28 +1,17 @@
 class Answer < ApplicationRecord
-    has_neighbors :embedding
-    belongs_to :user
-    belongs_to :question
-    after_save :_set_embedding
+  has_neighbors :embedding
+  belongs_to :user
+  belongs_to :question
+  before_save :_set_embedding
+  after_save :_increment_offset
 
-    private
+  private
 
-    def _set_embedding
-        self.embedding = _embedding_for(text)
-        self.save!
-    end
+  def _set_embedding
+      self.embedding = EmbeddingService.new(self.text).call
+  end
 
-    def _embedding_for(text)
-        response = openai_client.embeddings(
-          parameters: {
-            model: 'text-embedding-ada-002',
-            input: text
-          }
-        )
-        puts "!!Get Embedding!!"
-        response.dig('data', 0, 'embedding')
-    end
-
-    def openai_client
-        @openai_client ||= OpenAI::Client.new
-    end
+  def _increment_offset
+    self.user.increment_offset
+  end
 end

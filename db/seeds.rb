@@ -9,17 +9,17 @@
 
 # db/seeds.rb
 
-sys_user = User.create(name: "Ahmed Abdelhafiez", email: "Ahmed.Abdelhafiez@trianglz.com", country: "Egypt", source: "Facebook", question_offset: 0)
+sys_user = User.create(name: "Ahmed Abdelhafiez", email: "Ahmed.Abdelhafiez@trianglz.com", country: "Egypt", source: "Facebook")
 
 puts "Seed data for system user created successfully!"
 
 questions = [
-  "What is the category of your app idea?",
-  "What best describes your idea?",
-  "How are you funding your app?",
-  "What is your rough budget?",
-  "How soon do you need your app?"
-  
+  "What’s your business idea category?",
+  "What’s the primary focus or theme of your idea?",
+  "Is it in existence or a new product?",
+  "What’s your target audience?",
+  "What features do you consider essential for the initial release of your product?",
+  "What’s your expected duration"
   # Add more questions as needed
 ]
 

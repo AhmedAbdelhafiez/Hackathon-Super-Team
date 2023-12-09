@@ -3,8 +3,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :users
-  resources :questions
+  # resources :users
+  # resources :questions
   
   # Users
   get '/api/users', to: 'users#index'
@@ -15,15 +15,20 @@ Rails.application.routes.draw do
   delete '/api/user', to: 'users#delete'
   
   # Questions
-  get '/api/question', to: 'api#get_question'
-  post '/api/question', to: 'api#post_question'
-  get '/api/answer', to: 'api#get_answer'
-  post '/api/answer', to: 'api#post_answer'
+  get '/api/question', to: 'questions#get'
+  post '/api/question', to: 'questions#post'
   
+  # Answers
+  get '/api/answer' , to: 'answers#get_answer'
+  post '/api/answer', to: 'answers#post_answer'
+
   # Reports
-  get '/api/system_report', to: 'api#system_report'
-  get '/api/user_report', to: 'api#user_report'
+  get '/api/system_report', to: 'reports#system_report'
+  get '/api/user_report', to: 'reports#user_report'
   
   # Meetings
-  get '/api/request_meeting', to: 'api#request_meeting'
+  get '/api/request_meeting', to: 'users#request_meeting'
+
+  # Insights
+  get '/api/insights', to: 'users#get_insights'
 end

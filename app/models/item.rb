@@ -8,7 +8,6 @@ class Item < ApplicationRecord
     end
   end
 
-
   def self.get_user_context(user_id)
     result = Item.where(user_id: user_id)
     if result.count

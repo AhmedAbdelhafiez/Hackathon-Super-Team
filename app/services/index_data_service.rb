@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+# Not Used !!!!!
 class IndexDataService
     attr_reader :user_id
     attr_reader :page_name
@@ -15,11 +15,10 @@ class IndexDataService
     def call
         old_item = Item.get_item(@page_name)
         if old_item.nil?
-            embedding = get_embedding(@text)
+            embedding = EmbeddingService.new(question).call
             Item.create!(page_name: @page_name, text: @text, embedding: embedding, user_id: user_id)
             return 
         end
-        puts "It will Update Text for user #{@user_id} and old text #{old_item.text}"
         old_item.append_text(@text)
         embedding = get_embedding(old_item.text)
         old_item.embedding = embedding
@@ -27,11 +26,12 @@ class IndexDataService
     end
 
     private
+    
     def get_embedding(txt)
         response = @openai_client.embeddings(
             parameters: {
-            model: 'text-embedding-ada-002',
-            input: txt
+                model: 'text-embedding-ada-002',
+                input: txt
             }
         )
         response.dig('data', 0, 'embedding')

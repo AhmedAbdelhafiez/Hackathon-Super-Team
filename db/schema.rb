@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_06_230700) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_09_171350) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -42,6 +42,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_06_230700) do
     t.string "answer"
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.json "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -55,12 +62,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_06_230700) do
     t.string "experience"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "question_offset"
-    t.integer "state"
+    t.integer "question_offset", default: 1, null: false
+    t.integer "status", default: 0
   end
 
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "items", "users"
   add_foreign_key "questions", "users"
+  add_foreign_key "reports", "users"
 end
