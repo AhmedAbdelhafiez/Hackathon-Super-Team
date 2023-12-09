@@ -35,7 +35,7 @@ class QuestionService
 
   def message_to_chat_api(message_content)
     response = openai_client.chat(parameters: {
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-3.5-turbo-1106', # ToDo Need to upgrade it to GPT4
       messages: [
         { role: 'system', content: BACKGROUND},
         { role: 'user', content: message_content }
