@@ -81,7 +81,7 @@ class UserReportService
       sleep 3
       question = "Could you provide the list of MVP features that could be available in this project"
       context = @user.generate_simplified_summary
-      QuestionService.new(nil,question,context,1).call
+      QuestionService.new(question,context,1).call
     end
   end
   

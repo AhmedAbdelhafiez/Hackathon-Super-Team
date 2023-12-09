@@ -19,8 +19,8 @@ class AnswersController < ApplicationController
       if @user.question_offset == Question.questions_limit
         Rails.logger.info "User #{@user.id} reached the limit of Questions"
         @answer.save!
-        question = "This is a client's new business idea: #{@user.generate_summary} Based on the provided information do you find any similarities with Trianglz saved projects? if you find please provide me with the most similar project name and description. If you did not find a perfect match for me don not recommend anything, just tell me no perfect match. Ok!"
-        response = QuestionService.new(nil,question,nil,0).call
+        question = "This is a client's new business idea: #{@user.generate_summary} Based on the provided context, Do you find any similarities with Trianglz saved projects? if you find please provide me with the most similar project name and description. If you did not find a perfect match for me don not recommend anything, just tell me no perfect match. Ok!"
+        response = QuestionService.new(question,nil,0).call
         return render json: response.to_json
       end
       @answer.save!

@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 class QuestionService
-  attr_reader :background
   attr_reader :question
   attr_reader :context
   attr_reader :response_type
 
   BACKGROUND = "Trianglz is a software company that located in Alexandria Egypt
-  You are a wizard integerated in company website and you are reciveing requests from clients to build a software product".freeze
+  You are a wizard integerated in company website and You will be provided with requests from clients to build a software product, and your task is to understand, summarize and reply on questions provided.".freeze
     
   RESPONSELAYOUTS = [
     "Response will be in json format with three fields response and video
@@ -16,8 +15,7 @@ class QuestionService
       the third one is a video",
     "Act like a normal person"
   ]
-  def initialize(background, question, context, response_type)
-    @background = background || BACKGROUND
+  def initialize(question, context, response_type)
     @question = question
     @context = context
     @response_layout = RESPONSELAYOUTS[response_type]
@@ -26,8 +24,7 @@ class QuestionService
          
   def call()
     message_to_chat_api(<<~CONTENT)
-      Based on the following information  
-      Background:#{@background}
+      Based on the context below  
       Context:
       #{context}
       Reply on this question: #{@question} in this format #{@response_layout}
@@ -38,8 +35,11 @@ class QuestionService
 
   def message_to_chat_api(message_content)
     response = openai_client.chat(parameters: {
-      model: 'gpt-3.5-turbo-1106',
-      messages: [{ role: 'user', content: message_content }],
+      model: 'gpt-3.5-turbo',
+      messages: [
+        { role: 'system', content: BACKGROUND},
+        { role: 'user', content: message_content }
+      ],
       temperature: 0.5
     })
     response.dig('choices', 0, 'message', 'content')
@@ -66,4 +66,4 @@ class QuestionService
   end
 end
 
-# QuestionService.new("background"Yours question..", "context", "response_type").call
+# QuestionService.new("Yours question..", "context", "response_type").call
